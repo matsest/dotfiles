@@ -65,3 +65,5 @@
     trim = !git reflog expire --expire=now --all && git gc --prune=now
 [push]
 	default = simple
+[core]
+	editor = vim
