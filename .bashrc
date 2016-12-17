@@ -138,3 +138,10 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 alias slyrics='/home/matsest/spotifylyrics-1.13/SpotifyLyrics.pyw'
+
+export NPM_PACKAGES="/home/matsest/.npm-packages"
+
+export PATH="$NPM_PACKAGES/bin:$PATH"
+
+unset MANPATH # delete if you already modified MANPATH elsewhere in your config
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
