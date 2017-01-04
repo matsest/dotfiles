@@ -121,9 +121,9 @@ export EDITOR=/usr/bin/subl
 
 export PATH=$PATH:/home/matsest/ImageJ/
 
-#if [[ $TERMINIX_ID ]]; then
-#        source /etc/profile.d/vte.sh
-#fi
+if [[ $TERMINIX_ID ]]; then
+        source /etc/profile.d/vte.sh
+fi
 
 function _update_ps1() {
     PS1="$(~/powerline-shell/powerline-shell.py $? 2> /dev/null)"
