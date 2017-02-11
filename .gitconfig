@@ -11,7 +11,10 @@
     cm = commit
     last = log -1 HEAD --name-status
     br = branch
-	rem = remote -v
+    rem = remote -v
+
+    open = !google-chrome `git config remote.origin.url`
+    browse = !git open
 
     # For when you made that commit a bit too early, amend
     amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend

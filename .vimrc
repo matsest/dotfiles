@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tomasr/molokai'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -24,6 +25,8 @@ let g:jedi#auto_initialization = 1
 
 let mapleader=","       " leader is comma
 syntax enable
+set wrap
+set linebreak
 set tabstop=4
 set softtabstop=4
 set expandtab
@@ -53,7 +56,11 @@ nnoremap gV `[v`]
 nnoremap B ^
 nnoremap E $
 
+"activate Powerline
+set laststatus=2
+
+set textwidth=80
+
 " $/^ doesn't do anything
 nnoremap $ <nop>
 nnoremap ^ <nop>
-
