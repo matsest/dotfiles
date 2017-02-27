@@ -16,6 +16,8 @@
     open = !google-chrome `git config remote.origin.url`
     browse = !git open
 
+    shit = !google-chrome http://ohshitgit.com/
+
     # For when you made that commit a bit too early, amend
     amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
 
