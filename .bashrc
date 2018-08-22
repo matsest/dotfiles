@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 export PATH=$PATH:/usr/local/texlive/2016/bin/x86_64-linux
-export EDITOR=/usr/bin/subl
+export EDITOR=/usr/bin/vim
 
 export PATH=$PATH:/home/matsest/ImageJ/
 
