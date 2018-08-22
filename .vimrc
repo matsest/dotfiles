@@ -9,6 +9,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tomasr/molokai'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'shime/vim-livedown'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -18,15 +19,15 @@ filetype plugin indent on    " required
 "
 
 color molokai
-let g:molokai_original = 1
-
+" let g:molokai_original = 1
 let g:jedi#auto_initialization = 1
-
+let g:livedown_autorun = 1
+let g:livedown_open = 1
 
 let mapleader=","       " leader is comma
 syntax enable
 set wrap
-set linebreak
+set nolist
 set tabstop=4
 set softtabstop=4
 set expandtab
@@ -39,7 +40,7 @@ set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
-" turn off search highlight
+" turn off search highlight with comma-space
 nnoremap <leader><space> :nohlsearch<CR>
 set foldenable          " enable folding
 set foldlevelstart=10   " open most folds by default
@@ -59,7 +60,7 @@ nnoremap E $
 "activate Powerline
 set laststatus=2
 
-set textwidth=80
+set textwidth=0 wrapmargin=0
 
 " $/^ doesn't do anything
 nnoremap $ <nop>
