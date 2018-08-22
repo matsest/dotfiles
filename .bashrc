@@ -142,6 +142,10 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 alias slyrics='/home/matsest/spotifylyrics-1.13/SpotifyLyrics.pyw'
+alias todo=todo-txt
+alias t='todo-txt'
+export TODOTXT_DEFAULT_ACTION=ls
+
 
 export NPM_PACKAGES="/home/matsest/.npm-packages"
 
