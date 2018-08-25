@@ -105,6 +105,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+alias :q=exit
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -145,7 +147,6 @@ alias slyrics='/home/matsest/spotifylyrics-1.13/SpotifyLyrics.pyw'
 alias todo=todo-txt
 alias t='todo-txt'
 export TODOTXT_DEFAULT_ACTION=ls
-
 
 export NPM_PACKAGES="/home/matsest/.npm-packages"
 
