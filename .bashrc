@@ -118,20 +118,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:/usr/local/texlive/2016/bin/x86_64-linux
 export EDITOR=/usr/bin/vim
-
-export PATH=$PATH:/home/matsest/ImageJ/
 
 if [[ $TERMINIX_ID ]]; then
         source /etc/profile.d/vte.sh
 fi
 
 function _update_ps1() {
-    PS1="$(~/powerline-shell/powerline-shell.py $? 2> /dev/null)"
+    PS1=$(powerline-shell $?)
 }
 
-if [ "$TERM" != "linux" ]; then
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
@@ -143,22 +140,16 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-alias slyrics='/home/matsest/spotifylyrics-1.13/SpotifyLyrics.pyw'
 alias todo=todo-txt
 alias t='todo-txt'
 export TODOTXT_DEFAULT_ACTION=ls
 
 export NPM_PACKAGES="/home/matsest/.npm-packages"
-
 export PATH="$NPM_PACKAGES/bin:$PATH"
-
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 #add go to PATH
 export PATH=$PATH:/usr/local/go/bin
-
 export PATH=$PATH:/home/matsest/bin
-
 export PATH=$PATH:/home/matsest/Dropbox/prog/python/
-
