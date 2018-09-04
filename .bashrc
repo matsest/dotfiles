@@ -134,7 +134,8 @@ fi
 
 # for autojump
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
-. /usr/share/autojump/autojump.sh
+[[ -s /home/matsest/.autojump/etc/profile.d/autojump.sh ]] && source /home/matsest/.autojump/etc/profile.d/autojump.sh
+
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
