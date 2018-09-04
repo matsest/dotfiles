@@ -106,6 +106,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 alias :q=exit
+alias n.='nautilus .'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
