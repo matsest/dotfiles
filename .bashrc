@@ -121,7 +121,7 @@ fi
 
 export EDITOR=/usr/bin/vim
 
-if [[ $TERMINIX_ID ]]; then
+if [[ -n $TILIX_ID ]]; then
         source /etc/profile.d/vte.sh
 fi
 
@@ -130,13 +130,18 @@ function _update_ps1() {
 }
 
 if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+    PROMPT_COMMAND="$PROMPT_COMMAND; _update_ps1"
 fi
 
 # for autojump
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
 [[ -s /home/matsest/.autojump/etc/profile.d/autojump.sh ]] && source /home/matsest/.autojump/etc/profile.d/autojump.sh
 
+if [[ $TERM_PROGRAM = vscode ]]; then
+        PROMPT_COMMAND="_update_ps1 "
+fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -155,3 +160,4 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/matsest/bin
 export PATH=$PATH:/home/matsest/Dropbox/prog/python/
+export PATH=$PATH:/home/matsest/.local/bin
