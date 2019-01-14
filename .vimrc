@@ -21,7 +21,7 @@ filetype plugin indent on    " required
 color molokai
 let g:molokai_original = 1
 let g:jedi#auto_initialization = 1
-let g:livedown_autorun = 1
+let g:livedown_autorun = 0
 let g:livedown_open = 1
 
 let mapleader=","       " leader is comma
