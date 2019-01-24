@@ -89,8 +89,8 @@ fi
 
 # some more ls aliases
 alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias la='ls -a'
+alias l='ls'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -161,3 +161,11 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/matsest/bin
 export PATH=$PATH:/home/matsest/Dropbox/prog/python/
 export PATH=$PATH:/home/matsest/.local/bin
+
+
+# Enables autocompletion of options for bashfuscator
+eval "$(/usr/bin/register-python-argcomplete3 bashfuscator)"
+
+# Ubuntu libgtk3 fix
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgtk3-nocsd.so.0
+alias ls='lsd' # pretty ls
