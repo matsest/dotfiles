@@ -108,6 +108,11 @@ fi
 alias :q=exit
 alias n.='nautilus .'
 
+alias ls='lsd' # pretty ls
+alias myip="ip -br -c a"
+alias pubip="curl ifconfig.co -4"
+
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -118,8 +123,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export EDITOR=/usr/bin/vim
 
 if [[ -n $TILIX_ID ]]; then
         source /etc/profile.d/vte.sh
@@ -146,26 +149,24 @@ fi
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
+export EDITOR=/usr/bin/vim
 
+#todo-txt
 alias todo=todo-txt
 alias t='todo-txt'
 export TODOTXT_DEFAULT_ACTION=ls
 
-export NPM_PACKAGES="/home/matsest/.npm-packages"
-export PATH="$NPM_PACKAGES/bin:$PATH"
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
 #add go to PATH
 export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/home/matsest/bin
-export PATH=$PATH:/home/matsest/Dropbox/prog/python/
-export PATH=$PATH:/home/matsest/.local/bin
+export PATH=$PATH:/home/matsest/go/bin
 
+export PATH=$PATH:/home/matsest/.local/bin
 
 # Enables autocompletion of options for bashfuscator
 eval "$(/usr/bin/register-python-argcomplete3 bashfuscator)"
 
 # Ubuntu libgtk3 fix
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgtk3-nocsd.so.0
-alias ls='lsd' # pretty ls
+
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
