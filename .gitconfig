@@ -3,72 +3,82 @@
 	name = Mats Estensen
 
 [alias]
-    # Show all of my configured aliases
-    aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+  # Show all of my configured aliases
+  aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
 
 	st = status
 	co = checkout
-    cm = commit
-    last = log -1 HEAD --name-status
-    br = branch
-    rem = remote -v
+  cm = commit
+  last = log -1 HEAD --name-status
+  br = branch
+  rem = remote -v
 
-    open = !google-chrome `git config remote.origin.url`
-    browse = !git open
+  open = !google-chrome `git config remote.origin.url`
+  browse = !git open
 
-    shit = !google-chrome http://ohshitgit.com/
+  shit = !google-chrome http://ohshitgit.com/
 
-    # For when you made that commit a bit too early, amend
-    amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+  # For when you made that commit a bit too early, amend
+  amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
 
-    # Show all branches
-    br = branch -av
+  # Show all branches
+  br = branch -av
 
-    # Show the current branch name (usefull for shell prompts)
-    brname = !git branch | grep "^*" | awk '{ print $2 }'
+  # Show all dates for the remote branches
+  brdate = !git for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:iso8601)%09%(refname)' refs/remotes
 
-    # Delete a branch
-    brdel = branch -D
+  # Show the current branch name (usefull for shell prompts)
+  brname = !git branch | grep "^*" | awk '{ print $2 }'
 
-    # Which files are receiving the most "love"
-    churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+  # Delete a branch
+  brdel = branch -D
 
-    # View the log and diff for a commit (previous if no SHA1 provided)
-    details = log -n1 -p --format=fuller
+  # Which files are receiving the most "love"
+  churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
 
-    # Save a repo as a tarball
-    export = archive -o latest.tar.gz -9 --prefix=latest/
+  # View the log and diff for a commit (previous if no SHA1 provided)
+  details = log -n1 -p --format=fuller
 
-    # Unstage changes from the index
-    unstage = reset HEAD --
+  # Save a repo as a tarball
+  export = archive -o latest.tar.gz -9 --prefix=latest/
 
-    # View a pretty git log with branch tree
-    lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  # Unstage changes from the index
+  unstage = reset HEAD --
 
-    ls = !git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  # View a pretty git log with branch tree
+  lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
+  ls = !git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-    # Return a list of commit SHA1s
-    l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
+  # Return a list of commit SHA1s
+  l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
 
-    # Remove deleted files
-    r = !git ls-files -z --deleted | xargs -0 git rm
+  # Remove deleted files
+  r = !git ls-files -z --deleted | xargs -0 git rm
 
-    # Return the repository's root directory (usefull for shell prompts)
-    root = rev-parse --show-toplevel
+  # Return the repository's root directory (usefull for shell prompts)
+  root = rev-parse --show-toplevel
 
-    # Update all submodules
-    subup = submodule update --init
+  # Update all submodules
+  subup = submodule update --init
 
-    # List all tags
-    tags = tag -l
+  # List all tags
+  tags = tag -l
 
-    # Start a new local repository and perform initial commit
-    this = !git init && git add . && git commmit -m \"Initial commit.\"
+  # Start a new local repository and perform initial commit
+  this = !git init && git add . && git commmit -m \"Initial commit.\"
 
-    # Thin out older metadata within the repository, reduceses filesystem footprint
-    trim = !git reflog expire --expire=now --all && git gc --prune=now
+  # Thin out older metadata within the repository, reduceses filesystem footprint
+  trim = !git reflog expire --expire=now --all && git gc --prune=now
 [push]
 	default = simple
 [core]
 	editor = vim
+	autocrlf = input
+	eol = lf
+[init]
+	templateDir = /home/matsest/.git-template/
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
+[log]
+	date = local

@@ -105,14 +105,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-alias :q=exit
-alias n.='nautilus .'
-
-alias ls='lsd' # pretty ls
-alias myip="ip -br -c a"
-alias pubip="curl ifconfig.co -4"
-
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -122,10 +114,6 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
-fi
-
-if [[ -n $TILIX_ID ]]; then
-        source /etc/profile.d/vte.sh
 fi
 
 function _update_ps1() {
@@ -141,32 +129,41 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
 [[ -s /home/matsest/.autojump/etc/profile.d/autojump.sh ]] && source /home/matsest/.autojump/etc/profile.d/autojump.sh
 
 if [[ $TERM_PROGRAM = vscode ]]; then
-        PROMPT_COMMAND="_update_ps1 "
+    PROMPT_COMMAND="_update_ps1 "
 fi
 
+# fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# aliases
+alias :q=exit
+alias myip="ip -br -c a"
+alias pubip="curl ifconfig.co -4"
+alias tf="terraform"
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+
+
+# kubectl
+source <(kubectl completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
+
+# lang
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
+
 export EDITOR=/usr/bin/vim
 
-#todo-txt
-alias todo=todo-txt
-alias t='todo-txt'
-export TODOTXT_DEFAULT_ACTION=ls
-
-#add go to PATH
+#add to PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/matsest/go/bin
-
 export PATH=$PATH:/home/matsest/.local/bin
-
-# Enables autocompletion of options for bashfuscator
-eval "$(/usr/bin/register-python-argcomplete3 bashfuscator)"
-
-# Ubuntu libgtk3 fix
-export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgtk3-nocsd.so.0
-
-# add Pulumi to the PATH
-export PATH=$PATH:$HOME/.pulumi/bin
+export PATH=$PATH:/home/matsest/tools
+export PATH=$PATH:/home/matsest/utils
+export PATH="$HOME/.tfenv/bin:$PATH"
