@@ -117,15 +117,15 @@ if ! shopt -oq posix; then
 fi
 
 function _update_ps1() {
-    PS1=$(powerline-shell $?)
+  PS1=$(powerline-shell $?)
 }
 
 if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    PROMPT_COMMAND="$PROMPT_COMMAND; _update_ps1"
+  PROMPT_COMMAND="_update_ps1"
 fi
 
 # for autojump
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND}; history -a"
 [[ -s /home/matsest/.autojump/etc/profile.d/autojump.sh ]] && source /home/matsest/.autojump/etc/profile.d/autojump.sh
 
 if [[ $TERM_PROGRAM = vscode ]]; then
@@ -146,12 +146,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-
-
 # kubectl
-source <(kubectl completion bash)
-alias k=kubectl
-complete -F __start_kubectl k
+#source <(kubectl completion bash)
+#alias k=kubectl
+#complete -F __start_kubectl k
 
 # lang
 export LC_ALL=en_US.UTF-8
@@ -166,4 +164,16 @@ export PATH=$PATH:/home/matsest/go/bin
 export PATH=$PATH:/home/matsest/.local/bin
 export PATH=$PATH:/home/matsest/tools
 export PATH=$PATH:/home/matsest/utils
+export PATH=$PATH:/home/matsest/utils/adr-tools/src
 export PATH="$HOME/.tfenv/bin:$PATH"
+export PATH="$PATH:/home/matsest/.azure/bin"
+
+export GPG_TTY=$(tty)
+
+# SSH
+#Don't start if already running!
+#if ! [[ -v SSH_AUTH_SOCK ]] ; then
+#    eval `ssh-agent -s` > /dev/null
+#    ssh-add 2> /dev/null
+#    ssh-add ~/.ssh/nav 2> /dev/null
+#fi

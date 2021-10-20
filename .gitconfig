@@ -1,13 +1,13 @@
 [user]
-	email = mats.est@gmail.com
+	email = mats.estensen@devoteam.no
 	name = Mats Estensen
+	signingkey = 2E6121461F1AE788563AE5FC28AF55457FC2FA9B
 
 [alias]
   # Show all of my configured aliases
   aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
-
-	st = status
-	co = checkout
+  st = status
+  co = checkout
   cm = commit
   last = log -1 HEAD --name-status
   br = branch
@@ -59,6 +59,15 @@
   # Return the repository's root directory (usefull for shell prompts)
   root = rev-parse --show-toplevel
 
+  # Prune all old branches
+  remoteprune = remote prune origin
+
+  # Reword the last commit
+  reword = commit --amend
+
+  # Cleanup pruned branches
+  delpruned = !git branch --verbose | grep gone | awk '{ print $1 }' | xargs git branch -d
+
   # Update all submodules
   subup = submodule update --init
 
@@ -76,9 +85,13 @@
 	editor = vim
 	autocrlf = input
 	eol = lf
-[init]
-	templateDir = /home/matsest/.git-template/
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
 [log]
 	date = local
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[diff]
+	tool = vimdiff
