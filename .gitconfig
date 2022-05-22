@@ -1,7 +1,7 @@
 [user]
-	email = mats.estensen@devoteam.no
+	email = matsest@mxe.no
 	name = Mats Estensen
-	signingkey = 2E6121461F1AE788563AE5FC28AF55457FC2FA9B
+	signingkey = BCE2975A29D90B1F8B9956F11AA5609217274943
 
 [alias]
   # Show all of my configured aliases
@@ -16,7 +16,7 @@
   open = !google-chrome `git config remote.origin.url`
   browse = !git open
 
-  shit = !google-chrome http://ohshitgit.com/
+  shit = !firefox http://ohshitgit.com/
 
   # For when you made that commit a bit too early, amend
   amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
@@ -85,8 +85,6 @@
 	editor = vim
 	autocrlf = input
 	eol = lf
-[credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
 [log]
 	date = local
 [commit]
