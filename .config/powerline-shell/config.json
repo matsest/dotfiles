@@ -1,0 +1,13 @@
+{
+  "segments": [
+    "virtual_env",
+    "username",
+    "ssh",
+    "cwd",
+    "git",
+    "root"
+  ],
+  "cwd": {
+    "max_depth": 4
+  }
+}
