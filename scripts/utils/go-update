@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Check privileges
+if [[ "$(id -u)" -ne 0 ]]
+  then echo Please run this script as root or using sudo!
+  exit
+fi
+
+# Print current version
+export PATH="${PATH}:/usr/local/go/bin"
+
+# Check that go is installed
+if ! command -v go &> /dev/null
+    then echo "Go could not be found"
+else
+    CURRENT="$(go version | awk '{print $3}')"
+    echo "Current version: ${CURRENT}"
+fi
+
+# Check latest version
+VERSION=$(curl -s https://go.dev/VERSION?m=text | head -n1)
+
+if [[ "${CURRENT}" == "${VERSION}" ]]
+    then echo "Latest version ${VERSION} already installed" && exit
+    else echo "New version is available: ${VERSION}"
+fi
+
+# Exit script if dry run is given
+if [[ "$1" == "--check" ]]
+    then exit
+fi
+
+# Prompt user to continue
+read -r -p "Do you want to continue installing new version? [y/N] " response
+if [[ ! "${response}" =~ ^([yY][eE][sS]|[yY])$ ]]
+    then exit
+fi
+
+FILENAME="${VERSION}.linux-amd64.tar.gz"
+URI="https://dl.google.com/go/${FILENAME}"
+DOWNLOAD_DIR="/tmp/"
+
+# Download latest version
+echo "Downloading and installing new version..."
+wget --quiet "${URI}" -P "${DOWNLOAD_DIR}"
+
+# Remove current installation
+rm -rf /usr/local/go
+
+# Extract downloaded version
+tar -C /usr/local -xzf "${DOWNLOAD_DIR}${FILENAME}"
+
+# Delete latest version
+rm "${DOWNLOAD_DIR}${FILENAME}"
+
+# Print new version
+echo "New version installed: $(go version)"
