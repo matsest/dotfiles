@@ -69,7 +69,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions web-search)
+plugins=(git debian zsh-syntax-highlighting zsh-autosuggestions web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,11 +114,16 @@ export PATH=$PATH:/home/matsest/tools
 export PATH=$PATH:/home/matsest/utils
 export PATH=$PATH:/home/matsest/.dotnet/tools
 export PATH="$PATH:/home/matsest/.azure/bin"
+export PATH="$PATH:/home/matsest/utils/nvim-linux64/bin"
 
 # aliases
 alias :q=exit
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias n=nvim
+alias vim=nvim
+alias vimdiff='nvim -d'
+alias z=zellij
 
 # k8s
 source <(kubectl completion zsh)
@@ -132,3 +137,7 @@ autoload -U compinit && compinit -u
 
 autoload -U +X bashcompinit && bashcompinit
 source /etc/bash_completion.d/azure-cli
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval "$(/home/matsest/.local/bin/mise activate zsh)"
