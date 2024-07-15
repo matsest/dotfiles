@@ -69,7 +69,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian zsh-syntax-highlighting zsh-autosuggestions web-search)
+plugins=(git debian web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,11 +81,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='vim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -97,14 +97,6 @@ fi
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
-prompt_context() {
-  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-	  prompt_segment black default "%(!.%{%F{yellow}%}.)$USER (zsh)"
-  fi
-}
 
 # Paths
 export PATH=$PATH:/usr/local/go/bin
@@ -124,16 +116,11 @@ alias n=nvim
 alias vim=nvim
 alias vimdiff='nvim -d'
 alias z=zellij
+alias bat=batcat
 
 # k8s
 source <(kubectl completion zsh)
 alias k=kubectl
-
-# autojump
-[[ -s /home/matsest/.autojump/etc/profile.d/autojump.sh ]] && source /home/matsest/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 autoload -U +X bashcompinit && bashcompinit
 source /etc/bash_completion.d/azure-cli
@@ -141,3 +128,6 @@ source /etc/bash_completion.d/azure-cli
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(/home/matsest/.local/bin/mise activate zsh)"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
