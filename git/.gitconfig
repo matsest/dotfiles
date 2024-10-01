@@ -85,6 +85,7 @@
 	editor = vim
 	autocrlf = input
 	eol = lf
+	pager = less -F -X
 [log]
 	date = local
 [commit]
