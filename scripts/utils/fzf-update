@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Check that go is installed
+if ! command -v fzf &>/dev/null; then
+  echo "fzf could not be found"
+else
+  CURRENT="$(fzf --version | awk '{print $1}')"
+  echo "Current version: ${CURRENT}"
+fi
+
+# Check latest version
+VERSION=$(curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
+
+if [[ "${CURRENT}" == "${VERSION}" ]]; then
+  echo "Latest version ${VERSION} already installed" && exit
+else
+  echo "New version is available: ${VERSION}"
+fi
+
+# Exit script if dry run is given
+if [[ "$1" == "--check" ]]; then
+  exit
+fi
+
+# Prompt user to continue
+read -r -p "Do you want to continue installing new version? [y/N] " response
+if [[ ! "${response}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  exit
+fi
+
+FILENAME="fzf-${VERSION}-linux_amd64.tar.gz"
+URI="https://github.com/junegunn/fzf/releases/download/v${VERSION}/${FILENAME}"
+DOWNLOAD_DIR="/tmp/"
+
+# Download latest version
+echo "Downloading and installing new version..."
+wget --quiet "${URI}" -P "${DOWNLOAD_DIR}"
+
+# Extract downloaded version
+tar -C ~/utils -xzf "${DOWNLOAD_DIR}${FILENAME}"
+
+# Delete latest version
+rm "${DOWNLOAD_DIR}${FILENAME}"
+
+# Print new version
+echo "New version installed: $(fzf --version)"
