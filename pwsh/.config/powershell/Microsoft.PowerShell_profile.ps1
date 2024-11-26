@@ -11,3 +11,14 @@ Set-PSReadLineOption -PredictionSource HistoryandPlugin
 # Adding alias for vim style quit
 function exitPS { Invoke-Command -ScriptBlock { exit } }
 Set-alias -Name ':q' -Value exitPS
+
+# Windows specific
+if($PSVersionTable.Platform -eq "Win32NT"){
+  function rgrep {
+    param(
+      [Parameter(Position = 0, Mandatory = $true)] [string] $Pattern,
+      [Parameter(Mandatory = $false)] [string] $Path = $(Get-Location)
+    )
+    Get-ChildItem -Path $Path -Recurse | Select-String -Pattern $Pattern
+  }
+}
