@@ -1,0 +1,7 @@
+font-family = "CaskaydiaMono Nerd Font"
+font-size = 10
+window-padding-x = 16
+window-padding-y = 14
+window-decoration = false
+theme = "tokyonight"
+command = "/home/matsest/utils/zellij"
