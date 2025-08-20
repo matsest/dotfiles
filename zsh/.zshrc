@@ -69,7 +69,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian web-search)
+plugins=(autojump git debian web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,6 +107,7 @@ export PATH=$PATH:/home/matsest/utils
 export PATH=$PATH:/home/matsest/.dotnet/tools
 export PATH="$PATH:/home/matsest/.azure/bin"
 export PATH="$PATH:/home/matsest/utils/nvim-linux64/bin"
+export PATH="$PATH:/home/matsest/utils/zig"
 
 # aliases
 alias :q=exit
@@ -116,7 +117,12 @@ alias n=nvim
 alias vim=nvim
 alias vimdiff='nvim -d'
 alias z=zellij
-alias bat=batcat
+alias bat='batcat --style=plain'
+alias neofetch=fastfetch
+
+alias apu='sudo apt update'
+alias apl='apt list --upgradable'
+alias apg='sudo apt upgrade'
 
 # k8s
 source <(kubectl completion zsh)
